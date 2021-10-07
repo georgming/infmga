@@ -1,0 +1,2 @@
+# infmga
+my first repository
