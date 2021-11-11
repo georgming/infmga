@@ -12,10 +12,8 @@ RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 GREEN = (0, 255, 0)
-MAGENTA = (255, 0, 255)
-COLOOR = (0, 255, 255)
 BLACK = (0, 0, 0)
-COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
+COLORS = [RED, BLUE, YELLOW, GREEN]
 N = 10
 
 BALLS = [0] * N
@@ -24,10 +22,10 @@ for i in range(N):
 
 
 for i in range(N):
-    r = randint(30, 50)
+    r = randint(30, 60)
     x = randint(50, 900)
     y = randint(50, 500)
-    color = COLORS[randint(0, 5)]
+    color = COLORS[randint(0, 3)]
     BALLS[i][0] = x
     BALLS[i][1] = y
     BALLS[i][2] = r
@@ -43,7 +41,7 @@ finished = False
 A = []
 n = 0
 
-D = [0]* N
+D = [0] * N
 for i in range(N):
     D[i] = [1, 1]
 
@@ -74,58 +72,4 @@ while not finished:
     pygame.display.update()
     screen.fill(BLACK)
 pygame.quit()
-print('Количество очков', n)
-
-
-
-'''import pygame
-from pygame.draw import *
-from random import randint
-pygame.init()
-
-FPS = 2
-screen = pygame.display.set_mode((1200, 900))
-WHITE = (255, 255, 255)
-screen.fill(WHITE)
-
-RED = (255, 0, 0)
-BLUE = (0, 0, 255)
-YELLOW = (255, 255, 0)
-GREEN = (0, 255, 0)
-MAGENTA = (255, 0, 255)
-CYAN = (0, 255, 255)
-BLACK = (0, 0, 0)
-COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
-
-def new_ball():
-    global x, y, r
-    x = randint(100,700)
-    y = randint(100,500)
-    r = randint(30,50)
-    color = COLORS[randint(0, 5)]
-    circle(screen, color, (x, y), r)
-
-def click(event):
-    print(x, y, r)
-
-global schet
-schet = 0
-
-pygame.display.update()
-clock = pygame.time.Clock()
-finished = False
-
-while not finished:
-    clock.tick(FPS)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            finished = True
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            print('Click!')
-            if (event.x - x) ** 2 + (event.y - y) ** 2 <= r ** 2:
-                schet += 1
-                print('schet =', schet)
-    click(new_ball())
-    pygame.display.update()
-    screen.fill(WHITE)
-'''
+print('Количество очков:', n)
