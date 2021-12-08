@@ -3,10 +3,11 @@ from pygame.draw import *
 from random import randint
 pygame.init()
 
+screen_lenght = 1000
+screen_width = 600
 FPS = 60
-screen = pygame.display.set_mode((1200, 900))
+screen = pygame.display.set_mode((screen_lenght, screen_width))
 
-font = pygame.font.Font(None, 50)
 class ball:
     RED = (255, 0, 0)
     BLUE = (0, 0, 255)
@@ -26,7 +27,7 @@ class ball:
         self.x_0 = x
         self.y_0 = y
         self.r_0 = r
-        self.dv = [0,0]
+        self.dv = [0, 0]
         self.dv[0] = dx
         self.dv[1] = dy
         self.click_number = 0
@@ -34,24 +35,25 @@ class ball:
         circle(screen, self.COLOR, (self.x_0, self.y_0), self.r_0)
         self.x_0 += self.dv[0]
         self.y_0 += self.dv[1]
-        if self.x_0 >= 1200 - self.r_0 or self.x_0 <= self.r_0:
+        if self.x_0 >= screen_lenght - self.r_0 or self.x_0 <= self.r_0:
             self.dv[0] *= -1
-        if self.y_0 >= 900 - self.r_0 or self.y_0 <= self.r_0:
+        if self.y_0 >= screen_width - self.r_0 or self.y_0 <= self.r_0:
             self.dv[1] *= -1
-
 score = 0
 level_number = 0
 
-
+font = pygame.font.Font(None, 50)
+text = font.render("Score: ", True, (255, 255, 255))
+text2 = font.render(str(score), True, (255, 255, 255))
 
 pygame.display.update()
 clock = pygame.time.Clock()
 finished = False
-ball_1 = ball(randint(0, 5), randint(150, 1050), randint(100, 900), 50, 5, 5)
-ball_2 = ball(randint(0, 5), randint(150, 1050), randint(100, 900), 50, 10, 10)
-ball_3 = ball(randint(0, 5), randint(150, 1050), randint(100, 900), 40, 5, 5)
-ball_4 = ball(randint(0, 5), randint(150, 1050), randint(100, 900), 20, 5, 5)
-ball_5 = ball(randint(0, 5), randint(150, 1050), randint(100, 900), 10, 5, 5)
+ball_1 = ball(randint(0, 5), randint(150, screen_lenght - 150), randint(100, screen_width - 100), 50, 5, 5)
+ball_2 = ball(randint(0, 5), randint(150, screen_lenght - 150), randint(100, screen_width - 100), 50, 10, 10)
+ball_3 = ball(randint(0, 5), randint(150, screen_lenght - 150), randint(100, screen_width - 100), 40, 5, 5)
+ball_4 = ball(randint(0, 5), randint(150, screen_lenght - 150), randint(100, screen_width - 100), 20, 5, 5)
+ball_5 = ball(randint(0, 5), randint(150, screen_lenght - 150), randint(100, screen_width - 100), 10, 5, 5)
 balls = (ball_1, ball_2, ball_3, ball_4, ball_5)
 def click(event):
     click_x_y = event.pos
@@ -81,10 +83,11 @@ while not finished:
             balls[2].draw()
         if balls[1].click_number == 0 and balls[2].click_number ==1:
             balls[1].draw()
-    text = font.render("Score: ", True, (255,255,255))
-    text2 = font.render(str(score), True, (255,255,255))
-    screen.blit(text, [20, 20])
-    screen.blit(text2, [140, 20])
+
+    text = font.render("Score: ", True, (255, 255, 255))
+    text2 = font.render(str(score), True, (255, 255, 255))
+    screen.blit(text, [20, 10])
+    screen.blit(text2, [135, 10])
     pygame.display.update()
     screen.fill((0, 0, 0))
 pygame.quit()
