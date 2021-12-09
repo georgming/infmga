@@ -3,8 +3,8 @@ from pygame.draw import *
 from random import randint
 pygame.init()
 
-screen_lenght = 1000
-screen_width = 600
+screen_lenght = 500
+screen_width = 500
 
 FPS = 60
 screen = pygame.display.set_mode((screen_lenght, screen_width))
@@ -68,7 +68,7 @@ class ball:
 
 score = 0
 draw_mode = 1
-level = [[0], [1], ]
+level = 0
 
 pygame.display.update()
 clock = pygame.time.Clock()
@@ -78,7 +78,7 @@ ball_1 = ball(randint(0, 5), randint(200, screen_lenght - 200), randint(100, scr
 balls = [ball_1]
 def click(event):
     click_x_y = event.pos
-    global score, balls, ball_1
+    global score, level, balls, ball_1
     for i in range(len(balls)):
         if (balls[i].x_0 - balls[i].r_0 < click_x_y[0] < balls[i].x_0 + balls[i].r_0) and (
                 balls[i].y_0 - balls[i].r_0 < click_x_y[1] < balls[i].y_0 + balls[i].r_0) and (
@@ -95,12 +95,14 @@ def click(event):
                 break
 
     if score == 1 and balls == []:
+        level += 1
         d_l = 10 * screen_lenght // 12
         d_w = 8 * screen_width // 9
         ball_1 = ball(randint(0, 5), randint(screen_lenght - d_l, d_l), randint(200, d_w), 50, 10, 10)
         ball_2 = ball(randint(0, 5), randint(screen_lenght - d_l, d_l), randint(200, d_w), 40, 5, 5)
         balls = [ball_1, ball_2]
     if score == 3 and balls == []:
+        level += 1
         d_l = 10 * screen_lenght // 12
         d_w = 8 * screen_width // 9
         ball_1 = ball(randint(0, 5), randint(screen_lenght - d_l, d_l), randint(200, d_w), 30, 5, 5)
@@ -108,11 +110,13 @@ def click(event):
         ball_3 = ball(randint(0, 5), randint(screen_lenght - d_l, d_l), randint(200, d_w), 10, 5, 5)
         balls = [ball_1, ball_2, ball_3]
     if score == 6 and balls == []:
+        level += 1
         ball_1 = ball(randint(0, 5), randint(200, screen_lenght - 200), randint(200, screen_width - 100), 40, 0, 20)
         ball_2 = ball(randint(0, 5), randint(200, screen_lenght - 200), randint(200, screen_width - 100), 40, 20, 0)
         ball_3 = ball(randint(0, 5), randint(200, screen_lenght - 200), randint(200, screen_width - 100), 40, 20, 20)
         balls = [ball_1, ball_2, ball_3]
     if score == 9 and balls == []:
+        level += 1
         d_l = screen_lenght // 12
         d_w = screen_width // 12
         ball_1 = ball(randint(0, 5), 1 * d_l, 1 * d_w, 30, 7, 0)
@@ -127,6 +131,7 @@ def click(event):
         ball_10 = ball(randint(0, 5), 11 * d_l, 1 * d_w, 30, -7, 0)
         balls = [ball_1, ball_2, ball_3, ball_4, ball_5, ball_6, ball_7, ball_8, ball_9, ball_10]
     if score == 19 and balls == []:
+        level += 1
         ball_1 = ball(randint(0, 5), randint(200, screen_lenght - 200), randint(200, screen_width - 100), 100, 5, 5)
         balls = [ball_1,]
 
@@ -150,23 +155,15 @@ while not finished:
     screen.blit(text2, [140, 20])
 
     text = font.render("Level: ", True, (255, 255, 255))
-    if score == 0:
-        level_txt = font.render('0', True, (255, 255, 255))
-    if 1 <= score < 3:
-        level_txt = font.render('1', True, (255, 255, 255))
-    if 3 <= score < 6:
-        level_txt = font.render('2', True, (255, 255, 255))
-    if 6 <= score < 9:
-        level_txt = font.render('3', True, (255, 255, 255))
-    if 9 <= score < 19:
-        level_txt = font.render('4', True, (255, 255, 255))
-    if 19 <= score < 29:
-        level_txt = font.render('5', True, (255, 255, 255))
-    if 29 <= score:
-        level_txt = font.render('You win!', True, (255, 255, 255))
 
-    screen.blit(text, [500, 20])
-    screen.blit(level_txt, [650, 20])
+    if 29 <= score:
+        win = font.render('You WIN!', True, (255, 255, 255))
+        screen.blit(win, [screen_lenght / 4, screen_width / 2])
+
+    level_txt = font.render(str(level), True, (255, 255, 255))
+    screen.blit(text, [screen_lenght / 30, screen_width / 10])
+    screen.blit(level_txt, [screen_lenght / 4, screen_width / 10])
+
 
     pygame.display.update()
     screen.fill((0, 0, 0))
