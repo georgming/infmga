@@ -3,7 +3,7 @@ from pygame.draw import *
 from random import randint
 pygame.init()
 
-screen_lenght = 600
+screen_lenght = 1200
 screen_width = 600
 
 FPS = 60
@@ -161,7 +161,7 @@ while not finished:
 
     if 29 <= score:
         win = font.render('You WIN!', True, (255, 255, 255))
-        screen.blit(win, [screen_lenght / 2, screen_width / 2])
+        screen.blit(win, [screen_lenght / 2 - 70, screen_width / 2])
 
     level_txt = font.render(str(level), True, (255, 255, 255))
     screen.blit(text, [screen_lenght / 50, screen_width / 10])
