@@ -155,7 +155,7 @@ while not finished:
     text = font.render("Score: ", True, (255, 255, 255))
     text2 = font.render(str(score), True, (255, 255, 255))
     screen.blit(text, [screen_lenght / 50, screen_width / 25])
-    screen.blit(text2, [140, screen_width / 25])
+    screen.blit(text2, [screen_lenght / 7, screen_width / 25])
 
     text = font.render("Level: ", True, (255, 255, 255))
 
@@ -165,7 +165,7 @@ while not finished:
 
     level_txt = font.render(str(level), True, (255, 255, 255))
     screen.blit(text, [screen_lenght / 50, screen_width / 10])
-    screen.blit(level_txt, [screen_lenght / 4, screen_width / 10])
+    screen.blit(level_txt, [screen_lenght / 7, screen_width / 10])
 
     pygame.display.update()
     screen.fill((0, 0, 0))
