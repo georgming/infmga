@@ -3,8 +3,8 @@ from pygame.draw import *
 from random import randint
 pygame.init()
 
-screen_lenght = 500
-screen_width = 500
+screen_lenght = 1000
+screen_width = 600
 
 FPS = 60
 screen = pygame.display.set_mode((screen_lenght, screen_width))
@@ -73,7 +73,10 @@ level = 0
 pygame.display.update()
 clock = pygame.time.Clock()
 finished = False
-ball_1 = ball(randint(0, 5), randint(200, screen_lenght - 200), randint(100, screen_width), 50, 5, 5)
+
+d_l = 10 * screen_lenght // 12
+d_w = 8 * screen_width // 9
+ball_1 = ball(randint(0, 5), randint(screen_lenght - d_l, d_l), randint(2 * (screen_width - d_w), d_w), 50, 5, 5)
 
 balls = [ball_1]
 def click(event):
@@ -151,8 +154,8 @@ while not finished:
 
     text = font.render("Score: ", True, (255, 255, 255))
     text2 = font.render(str(score), True, (255, 255, 255))
-    screen.blit(text, [20, 20])
-    screen.blit(text2, [140, 20])
+    screen.blit(text, [screen_lenght / 50, screen_width / 25])
+    screen.blit(text2, [140, screen_width / 25])
 
     text = font.render("Level: ", True, (255, 255, 255))
 
@@ -161,9 +164,8 @@ while not finished:
         screen.blit(win, [screen_lenght / 4, screen_width / 2])
 
     level_txt = font.render(str(level), True, (255, 255, 255))
-    screen.blit(text, [screen_lenght / 30, screen_width / 10])
+    screen.blit(text, [screen_lenght / 50, screen_width / 10])
     screen.blit(level_txt, [screen_lenght / 4, screen_width / 10])
-
 
     pygame.display.update()
     screen.fill((0, 0, 0))
